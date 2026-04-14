@@ -4,119 +4,526 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Kevin Arga Rajagukguk</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #0ea5e9;
+            --blue-dark: #0369a1;
+            --bg: #f0f4f8;
+            --white: #ffffff;
+            --text: #0f172a;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --green: #22c55e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        .app {
+            display: flex;
+            height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px 24px;
+            overflow-y: auto;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .sidebar::-webkit-scrollbar { width: 0; }
+
+        .profile-photo {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            object-fit: cover; object-position: top;
+            border: 3px solid var(--border);
+        }
+        .sidebar-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px; line-height: 1.2;
+            color: var(--text); margin-top: 4px;
+        }
+        .sidebar-role {
+            font-size: 12px; color: var(--blue-dark);
+            background: #e0f2fe; padding: 4px 12px;
+            border-radius: 20px; display: inline-block; margin-top: 6px;
+        }
+        .sidebar-divider { height: 1px; background: var(--border); }
+        .info-row {
+            display: flex; justify-content: space-between;
+            align-items: center; font-size: 13px; padding: 6px 0;
+        }
+        .info-row span:first-child { color: var(--muted); }
+        .info-row span:last-child { font-weight: 500; }
+        .status-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--green); display: inline-block; margin-right: 5px;
+        }
+        .lang-item { margin-bottom: 14px; }
+        .lang-label {
+            display: flex; justify-content: space-between;
+            font-size: 12px; color: var(--muted); margin-bottom: 5px;
+        }
+        .lang-bar { height: 4px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .lang-fill { height: 100%; background: var(--blue); border-radius: 4px; }
+        .btn-cv {
+            display: block; background: var(--text); color: white;
+            text-align: center; text-decoration: none;
+            padding: 12px; border-radius: 10px;
+            font-size: 13px; font-weight: 500;
+            letter-spacing: 0.05em; transition: background 0.2s; margin-top: auto;
+        }
+        .btn-cv:hover { background: var(--blue-dark); }
+
+        /* MAIN */
+        .content {
+            flex: 1; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        .content::-webkit-scrollbar { width: 0; }
+
+        /* NAVBAR */
+        .navbar {
+            background: var(--white); border-radius: 14px;
+            padding: 0 24px; display: flex; align-items: center;
+            height: 54px; position: sticky; top: 0; z-index: 100; flex-shrink: 0;
+        }
+        .nav-menu { display: flex; list-style: none; gap: 4px; }
+        .nav-menu a {
+            text-decoration: none; color: var(--muted);
+            font-size: 13px; font-weight: 500;
+            padding: 6px 14px; border-radius: 8px; transition: all 0.2s;
+        }
+        .nav-menu a:hover { color: var(--text); background: var(--bg); }
+
+        /* HERO */
+        .hero-card {
+            background: var(--white); border-radius: 20px; overflow: hidden;
+            display: grid; grid-template-columns: 360px 1fr;
+            min-height: 360px; flex-shrink: 0;
+        }
+        .hero-photo-col { position: relative; overflow: hidden; }
+        .hero-photo-col img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: top center; display: block;
+        }
+        .hero-photo-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(3,105,161,0.78) 0%, rgba(14,165,233,0.45) 50%, transparent 100%);
+        }
+        .hero-photo-text {
+            position: absolute; bottom: 28px; left: 28px; right: 28px; z-index: 2;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white; font-size: 11px; letter-spacing: 0.08em;
+            padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
+        }
+        .hero-name-overlay {
+            font-family: 'DM Serif Display', serif;
+            font-size: 32px; color: white; line-height: 1.15;
+        }
+        .hero-location { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 6px; }
+        .hero-text-col {
+            padding: 40px; display: flex;
+            flex-direction: column; justify-content: space-between;
+        }
+        .hero-eyebrow {
+            font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+            color: var(--blue); text-transform: uppercase; margin-bottom: 12px;
+        }
+        .hero-headline {
+            font-family: 'DM Serif Display', serif;
+            font-size: 34px; line-height: 1.2; color: var(--text); margin-bottom: 16px;
+        }
+        .hero-headline em { color: var(--blue); font-style: italic; }
+        .hero-desc {
+            font-size: 14px; color: var(--muted);
+            line-height: 1.75; max-width: 420px; margin-bottom: 24px;
+        }
+        .hero-status-row {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 13px; color: var(--muted); margin-bottom: 24px;
+        }
+        .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+        .btn-hire {
+            background: var(--blue); color: white; border: none;
+            padding: 11px 24px; border-radius: 10px;
+            font-size: 13px; font-weight: 500; cursor: pointer;
+            text-decoration: none; display: inline-block; transition: background 0.2s;
+        }
+        .btn-hire:hover { background: var(--blue-dark); }
+        .btn-ghost {
+            background: transparent; color: var(--text);
+            border: 1px solid var(--border); padding: 11px 24px;
+            border-radius: 10px; font-size: 13px; font-weight: 500;
+            cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s;
+        }
+        .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+        .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .stat-box { background: var(--bg); border-radius: 12px; padding: 14px 16px; }
+        .stat-num { font-size: 18px; font-weight: 700; color: var(--text); display: block; }
+        .stat-lbl { font-size: 11px; color: var(--muted); margin-top: 3px; display: block; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .skill-tag {
+            background: #e0f2fe; color: var(--blue-dark);
+            font-size: 12px; padding: 5px 14px; border-radius: 20px; font-weight: 500;
+        }
+
+        /* SECTIONS */
+        .section {
+            background: var(--white); border-radius: 20px;
+            padding: 36px; flex-shrink: 0;
+        }
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 24px; margin-bottom: 24px; color: var(--text);
+        }
+        .about-text { font-size: 15px; line-height: 1.8; color: var(--muted); max-width: 620px; }
+        .cv-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--blue); text-decoration: none;
+            font-size: 14px; font-weight: 500; margin-top: 18px;
+            padding: 10px 20px; border: 1px solid var(--blue);
+            border-radius: 10px; transition: all 0.2s;
+        }
+        .cv-link:hover { background: var(--blue); color: white; }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .skill-card {
+            background: var(--bg); border-radius: 14px;
+            padding: 24px 20px; transition: transform 0.2s;
+        }
+        .skill-card:hover { transform: translateY(-4px); }
+        .skill-icon { font-size: 22px; margin-bottom: 12px; display: block; }
+        .skill-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .skill-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .projects-row2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: calc(66.66% + 8px);
+        }
+        .project-card {
+            background: var(--bg); border-radius: 14px;
+            padding: 24px 20px; transition: transform 0.2s, box-shadow 0.2s;
+            display: flex; flex-direction: column;
+            position: relative; overflow: hidden;
+        }
+        .project-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: var(--blue); opacity: 0; transition: opacity 0.2s;
+        }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(14,165,233,0.1); }
+        .project-card:hover::before { opacity: 1; }
+        .project-company {
+            font-size: 11px; letter-spacing: 0.08em;
+            color: var(--blue); font-weight: 600;
+            text-transform: uppercase; margin-bottom: 8px;
+        }
+        .project-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; line-height: 1.35; }
+        .project-card p { font-size: 13px; color: var(--muted); line-height: 1.65; flex: 1; }
+        .project-link {
+            color: var(--blue); text-decoration: none;
+            font-size: 13px; font-weight: 600;
+            margin-top: 16px; display: inline-flex;
+            align-items: center; gap: 4px; transition: gap 0.2s;
+        }
+        .project-link:hover { gap: 8px; }
+
+        /* CONTACT */
+        .contact-form { display: flex; flex-direction: column; gap: 14px; max-width: 560px; }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%; padding: 13px 16px;
+            border: 1.5px solid var(--border); border-radius: 10px;
+            font-family: 'DM Sans', sans-serif; font-size: 14px;
+            color: var(--text); background: var(--bg);
+            outline: none; transition: border-color 0.2s;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus { border-color: var(--blue); background: white; }
+        .contact-form textarea { min-height: 120px; resize: vertical; }
+        .contact-form button {
+            background: var(--blue); color: white; border: none;
+            padding: 13px 28px; border-radius: 10px;
+            font-size: 14px; font-weight: 600; cursor: pointer;
+            align-self: flex-start; transition: background 0.2s;
+        }
+        .contact-form button:hover { background: var(--blue-dark); }
+
+        footer {
+            text-align: center; font-size: 13px;
+            color: var(--muted); padding: 8px 0 4px; flex-shrink: 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .hero-card { grid-template-columns: 300px 1fr; }
+            .hero-headline { font-size: 28px; }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .projects-row2 { max-width: 100%; }
+        }
+        @media (max-width: 900px) {
+            body { overflow: auto; }
+            .app { flex-direction: column; height: auto; padding: 16px; }
+            .sidebar { width: 100%; min-width: unset; }
+            .hero-card { grid-template-columns: 1fr; }
+            .hero-photo-col { min-height: 260px; }
+            .projects-grid { grid-template-columns: 1fr 1fr; }
+            .projects-row2 { max-width: 100%; }
+        }
+        @media (max-width: 600px) {
+            .stat-row { grid-template-columns: repeat(2, 1fr); }
+            .hero-headline { font-size: 24px; }
+            .hero-text-col { padding: 28px 24px; }
+            .projects-grid, .projects-row2 { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="profile-card">
-                <div class="profile-img">
-    <img src="https://lh3.googleusercontent.com/u/0/d/10-l3v3RtEOUzcBFR-aGhyhqLQ863uwr-=w1000-h1000" alt="Kevin Arga Rajagukguk">
-</div>
-                <h3>Kevin Arga Rajagukguk</h3>
-                <p class="tag">Fresh Graduate Geofisika</p>
-                
-                <div class="info-list">
-                    <div class="info-item"><span>Umur:</span> <span>24</span></div>
-                    <div class="info-item"><span>Status:</span> <span class="status-available">Available</span></div>
-                    <div class="info-item"><span>Lokasi:</span> <span>Jakarta, ID</span></div>
-                </div>
+<div class="app">
 
-                <div class="languages">
-                    <h4>Bahasa</h4>
-                    <div class="skill-bar"><span>Indonesia</span><div class="bar"><div class="fill" style="width: 100%"></div></div></div>
-                    <div class="skill-bar"><span>English</span><div class="bar"><div class="fill" style="width: 60%"></div></div></div>
-                </div>
-
-                <a href="https://drive.google.com/file/d/1nVCs3KJ9O4Ge1NrIPPl4jK_-RUyxdvVt/view?usp=drive_link" target="_blank" class="btn-cv">UNDUH CV</a>
+    <aside class="sidebar">
+        <div>
+            <img class="profile-photo"
+                src="https://lh3.googleusercontent.com/u/0/d/10-l3v3RtEOUzcBFR-aGhyhqLQ863uwr-=w1000-h1000"
+                alt="Kevin Arga Rajagukguk">
+            <h3 class="sidebar-name">Kevin Arga<br>Rajagukguk</h3>
+            <span class="sidebar-role">Fresh Graduate Geofisika</span>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div>
+            <div class="info-row"><span>Umur</span><span>24 tahun</span></div>
+            <div class="info-row">
+                <span>Status</span>
+                <span><span class="status-dot"></span>Available</span>
             </div>
-        </aside>
+            <div class="info-row"><span>Lokasi</span><span>Jakarta, ID</span></div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div>
+            <p style="font-size:12px;color:var(--muted);margin-bottom:14px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;">Bahasa</p>
+            <div class="lang-item">
+                <div class="lang-label"><span>Indonesia</span><span>Native</span></div>
+                <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+            </div>
+            <div class="lang-item">
+                <div class="lang-label"><span>English</span><span>Intermediate</span></div>
+                <div class="lang-bar"><div class="lang-fill" style="width:60%"></div></div>
+            </div>
+        </div>
+        <a href="https://drive.google.com/file/d/1VTVm3xLZwNt3I0Xuoon0oZQhFu2LzeAb/view?usp=sharing"
+           target="_blank" class="btn-cv">↓ Unduh CV</a>
+    </aside>
 
-        <main class="content">
-            <header>
-                <nav class="navbar">
-                    <ul class="nav-menu">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">Tentang</a></li>
-                        <li><a href="#skills">Keahlian</a></li>
-                        <li><a href="#projects">Project</a></li>
-                        <li><a href="#contact">Kontak</a></li>
-                    </ul>
-                </nav>
-            </header>
+    <main class="content">
 
-            <section id="home" class="hero">
-                <div class="hero-box">
-                    <div class="hero-text">
-                        <h1>I'm Kevin Arga <br><span>Geophysics</span> Graduate</h1>
-                        <p>Mengolah data kebumian untuk memahami bumi dan mendukung masa depan energi yang berkelanjutan.</p>
-                        <a href="#contact" class="btn-hire">HUBUNGI SAYA &rarr;</a>
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#skills">Keahlian</a></li>
+                <li><a href="#projects">Project</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+
+        <!-- HERO -->
+        <section id="home" class="hero-card">
+            <div class="hero-photo-col">
+                <img src="https://lh3.googleusercontent.com/u/0/d/10-l3v3RtEOUzcBFR-aGhyhqLQ863uwr-=w1000-h1000"
+                     alt="Kevin Arga Rajagukguk">
+                <div class="hero-photo-overlay"></div>
+                <div class="hero-photo-text">
+                    <span class="hero-badge">GEOPHYSICS GRADUATE</span>
+                    <h2 class="hero-name-overlay">Kevin Arga<br>Rajagukguk</h2>
+                    <p class="hero-location">📍 Jakarta, Indonesia</p>
+                </div>
+            </div>
+            <div class="hero-text-col">
+                <div>
+                    <p class="hero-eyebrow">Geophysics · Data · Exploration</p>
+                    <h1 class="hero-headline">Membaca Bumi<br>Lewat <em>Data</em></h1>
+                    <p class="hero-desc">Lulusan Geofisika dengan pengalaman di industri migas dan energi — dari Pertamina EP, Medco, hingga Newquest Geotechnology. Terbuka untuk peluang di geosains, energi, analisis data, dan peran strategis lainnya.</p>
+                    <div class="hero-status-row">
+                        <span class="status-dot"></span>
+                        <span>Tersedia untuk pekerjaan baru</span>
                     </div>
-                    <div class="hero-illustration">
-                        <div class="geo-icon">🌎</div>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn-hire">Hubungi Saya →</a>
+                        <a href="https://drive.google.com/file/d/1VTVm3xLZwNt3I0Xuoon0oZQhFu2LzeAb/view?usp=sharing"
+                           target="_blank" class="btn-ghost">Unduh CV</a>
                     </div>
                 </div>
-            </section>
-
-            <section id="about" class="section">
-                <h2 class="section-title">Tentang Saya</h2>
-                <div class="card">
-                    <p>Saya adalah lulusan Geofisika yang memiliki ketertarikan pada eksplorasi, analisis data kebumian, dan riset ilmiah berbasis data. Terbiasa bekerja dengan data, pemodelan, serta pemecahan masalah secara analitis.</p>
-                </div>
-            </section>
-
-            <section id="skills" class="section">
-                <h2 class="section-title">Keahlian Utama</h2>
-                <div class="grid-container">
-                    <div class="card-service">
-                        <div class="icon">📊</div>
-                        <h3>Analisis Data</h3>
-                        <p>Seismik, gravitasi, resistivitas, dan interpretasi bawah permukaan.</p>
+                <div>
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <span class="stat-num">5</span>
+                            <span class="stat-lbl">Project</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num">Petrel</span>
+                            <span class="stat-lbl">Software Utama</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num">Python</span>
+                            <span class="stat-lbl">Programming</span>
+                        </div>
                     </div>
-                    <div class="card-service">
-                        <div class="icon">💻</div>
-                        <h3>Software</h3>
-                        <p>Petrel, Python, Excel, dan analisis numerik kebumian.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="projects" class="section">
-                <h2 class="section-title">Project & Pengalaman</h2>
-                <div class="grid-container">
-                    <div class="card-project">
-                        <h4>PT Pertamina EP</h4>
-                        <p>Analisis data bawah permukaan tugas akhir.</p>
-                        <a href="https://drive.google.com/file/d/18ZY7ErKEte3sV8WC--qmNBsekfkPkNyi/view?usp=sharing" target="_blank">Lihat Project &rarr;</a>
-                    </div>
-                    <div class="card-project">
-                        <h4>Medco EP Indonesia</h4>
-                        <p>Interpretasi data geofisika industri migas.</p>
-                        <a href="https://drive.google.com/file/d/1JTkYsbvlqTjx_gm0NEv2FK8i5ebjTQ5d/view?usp=sharing" target="_blank">Lihat Project &rarr;</a>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Seismik</span>
+                        <span class="skill-tag">Gravitasi</span>
+                        <span class="skill-tag">Resistivitas</span>
+                        <span class="skill-tag">Magnetotellurik</span>
+                        <span class="skill-tag">Geotermal</span>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="contact" class="section">
-                <h2 class="section-title">Kontak</h2>
-                <div class="card">
-                    <form action="mailto:kevinarga01@gmail.com" method="post" enctype="text/plain" class="contact-form">
-                        <input type="text" name="Nama" placeholder="Nama" required>
-                        <input type="email" name="Email" placeholder="Email" required>
-                        <textarea name="Pesan" placeholder="Pesan" required></textarea>
-                        <button type="submit">KIRIM PESAN</button>
-                    </form>
+        <!-- ABOUT -->
+        <section id="about" class="section">
+            <h2 class="section-title">Tentang Saya</h2>
+            <p class="about-text">Saya adalah lulusan Geofisika yang memiliki ketertarikan pada eksplorasi, analisis data kebumian, dan riset ilmiah berbasis data. Terbiasa bekerja dengan data, pemodelan, serta pemecahan masalah secara analitis.</p>
+            <p class="about-text" style="margin-top:14px;">Untuk informasi lebih lengkap mengenai latar belakang pendidikan, pengalaman, dan keahlian, silakan lihat CV saya:</p>
+            <a href="https://drive.google.com/file/d/1VTVm3xLZwNt3I0Xuoon0oZQhFu2LzeAb/view?usp=sharing"
+               target="_blank" class="cv-link">📄 CV Kevin Arga Rajagukguk</a>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="section">
+            <h2 class="section-title">Keahlian Utama</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <span class="skill-icon">📊</span>
+                    <h3>Analisis Data Geofisika</h3>
+                    <p>Seismik, gravitasi, resistivitas, dan magnetik untuk interpretasi bawah permukaan.</p>
                 </div>
-            </section>
+                <div class="skill-card">
+                    <span class="skill-icon">🖥️</span>
+                    <h3>Pengolahan Data</h3>
+                    <p>Petrel, Python, Excel, dan metode analisis numerik untuk data kebumian.</p>
+                </div>
+                <div class="skill-card">
+                    <span class="skill-icon">🌋</span>
+                    <h3>Eksplorasi Geotermal</h3>
+                    <p>Metode Magnetotellurik (MT) untuk studi eksplorasi sumber energi panas bumi.</p>
+                </div>
+            </div>
+        </section>
 
-            <footer>
-                <p>&copy; <span id="year"></span> Kevin Arga Rajagukguk</p>
-            </footer>
-        </main>
-    </div>
+        <!-- PROJECTS -->
+        <section id="projects" class="section">
+            <h2 class="section-title">Project & Pengalaman</h2>
 
-    <script src="js/script.js"></script>
+            <!-- Baris 1: 3 project -->
+            <div class="projects-grid">
+                <div class="project-card">
+                    <p class="project-company">PT Pertamina EP</p>
+                    <h4>Tugas Akhir – Analisis Data Subsurface</h4>
+                    <p>Analisis data bawah permukaan dalam lingkungan industri migas terkemuka Indonesia sebagai project tugas akhir.</p>
+                    <a href="https://drive.google.com/file/d/18ZY7ErKEte3sV8WC--qmNBsekfkPkNyi/view?usp=sharing"
+                       target="_blank" class="project-link">Lihat Project →</a>
+                </div>
+                <div class="project-card">
+                    <p class="project-company">Medco EP Indonesia</p>
+                    <h4>Interpretasi Data Geofisika Migas</h4>
+                    <p>Analisis dan interpretasi data geofisika dalam lingkungan industri minyak dan gas bumi.</p>
+                    <a href="https://drive.google.com/file/d/1JTkYsbvlqTjx_gm0NEv2FK8i5ebjTQ5d/view?usp=sharing"
+                       target="_blank" class="project-link">Lihat Project →</a>
+                </div>
+                <div class="project-card">
+                    <p class="project-company">PT Newquest Geotechnology</p>
+                    <h4>Eksplorasi Geotermal – Metode MT</h4>
+                    <p>Studi eksplorasi geotermal menggunakan metode Magnetotellurik (MT) untuk pemetaan sumber panas bumi.</p>
+                    <a href="https://drive.google.com/file/d/11CwHJPms58y4R3yCLDwtlqQjz8m39e80/view?usp=sharing"
+                       target="_blank" class="project-link">Lihat Project →</a>
+                </div>
+            </div>
+
+            <!-- Baris 2: 2 project terpusat -->
+            <div style="margin-top:16px;">
+                <div class="projects-row2">
+                    <div class="project-card">
+                        <p class="project-company">PT Amati Karya Indonesia</p>
+                        <h4>Website Desa Botubarani</h4>
+                        <p>Pengembangan website informasi untuk memperkenalkan terumbu karang dan mendukung UMKM lokal.</p>
+                        <a href="https://drive.google.com/file/d/1HtSSWm01l6mI3vaOUflxkatUUkvxUoUJ/view?usp=sharing"
+                           target="_blank" class="project-link">Lihat Project →</a>
+                    </div>
+                    <div class="project-card">
+                        <p class="project-company">PT Amati Karya Indonesia</p>
+                        <h4>Solusi Lingkungan – Tetrapod Ramah Lingkungan</h4>
+                        <p>Inovasi pengelolaan limbah plastik dan perlindungan garis pantai menggunakan tetrapod ramah lingkungan.</p>
+                        <a href="https://drive.google.com/file/d/1y9-lLiyEJ4nYG5plUcQpuwXxMV8sBAti/view?usp=sharing"
+                           target="_blank" class="project-link">Lihat Project →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="section">
+            <h2 class="section-title">Kontak</h2>
+            <form action="mailto:kevinarga01@gmail.com" method="post" enctype="text/plain" class="contact-form">
+                <input type="text" name="Nama" placeholder="Nama Lengkap" required>
+                <input type="email" name="Email" placeholder="Alamat Email" required>
+                <textarea name="Pesan" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                <button type="submit">Kirim Pesan →</button>
+            </form>
+        </section>
+
+        <footer>
+            <p>&copy; <span id="year"></span> Kevin Arga Rajagukguk · Jakarta, Indonesia</p>
+        </footer>
+
+    </main>
+</div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -3,187 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Kevin Arga Rajagukguk</title>
-
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <title>Portfolio | Kevin Arga Rajagukguk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <h1>Portfolio</h1>
+    <div class="app-container">
+        <aside class="sidebar">
+    <div class="profile-card">
+        <div class="profile-img">
+            <img src="foto arga .jpg" alt="Kevin Arga Rajagukguk">
+        </div>
+        <h3>Kevin Arga Rajagukguk</h3>
+        <p class="tag">Fresh Graduate Geofisika</p>
+        
+        <div class="info-list">
+            <div class="info-item"><span>Umur:</span> <span>24</span></div>
+            <div class="info-item"><span>Status:</span> <span class="status-available">Available</span></div>
+            <div class="info-item"><span>Lokasi:</span> <span>Jakarta, ID</span></div>
+        </div>
+        
+        </div>
+</aside>
+
+                <div class="languages">
+                    <h4>Bahasa</h4>
+                    <div class="skill-bar"><span>Indonesia</span><div class="bar"><div class="fill" style="width: 100%"></div></div></div>
+                    <div class="skill-bar"><span>English</span><div class="bar"><div class="fill" style="width: 50%"></div></div></div>
+                </div>
+
+                <a href="https://drive.google.com/file/d/1nVCs3KJ9O4Ge1NrIPPl4jK_-RUyxdvVt/view?usp=drive_link" target="_blank" class="btn-cv">UNDUH CV</a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">Tentang Saya</a></li>
-                <li><a href="#skills">Keahlian</a></li>
-                <li><a href="#projects">Project</a></li>
-                <li><a href="#contact">Kontak</a></li>
-            </ul>
-        </nav>
-    </header>
+        </aside>
 
-    <main>
+        <main class="content">
+            <header>
+                <nav class="navbar">
+                    <ul class="nav-menu">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">Tentang</a></li>
+                        <li><a href="#skills">Keahlian</a></li>
+                        <li><a href="#projects">Project</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </nav>
+            </header>
 
-        <section id="home" class="hero">
-    <div class="hero-slideshow">
-        <div class="slide slide-1"></div>
-        <div class="slide slide-2"></div>
-        <div class="slide slide-3"></div>
+            <section id="home" class="hero">
+                <div class="hero-box">
+                    <div class="hero-text">
+                        <h1>I'm Kevin Arga <br><span>Geophysics</span> Graduate</h1>
+                        <p>Mengolah data kebumian untuk memahami bumi dan mendukung masa depan energi yang berkelanjutan.</p>
+                        <a href="#contact" class="btn-hire">HUBUNGI SAYA &rarr;</a>
+                    </div>
+                    <div class="hero-illustration">
+                        <div class="geo-icon">🌎</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="section">
+                <h2 class="section-title">Tentang Saya</h2>
+                <div class="card">
+                    <p>Saya adalah lulusan Geofisika yang memiliki ketertarikan pada eksplorasi, analisis data kebumian, dan riset ilmiah berbasis data. Terbiasa bekerja dengan data, pemodelan, serta pemecahan masalah secara analitis.</p>
+                </div>
+            </section>
+
+            <section id="skills" class="section">
+                <h2 class="section-title">Keahlian Utama</h2>
+                <div class="grid-container">
+                    <div class="card-service">
+                        <div class="icon">📊</div>
+                        <h3>Analisis Data</h3>
+                        <p>Seismik, gravitasi, resistivitas, dan interpretasi bawah permukaan.</p>
+                    </div>
+                    <div class="card-service">
+                        <div class="icon">💻</div>
+                        <h3>Software</h3>
+                        <p>Petrel, Python, Excel, dan analisis numerik kebumian.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="section">
+                <h2 class="section-title">Project & Pengalaman</h2>
+                <div class="grid-container">
+                    <div class="card-project">
+                        <h4>PT Pertamina EP</h4>
+                        <p>Analisis data bawah permukaan tugas akhir.</p>
+                        <a href="https://drive.google.com/file/d/18ZY7ErKEte3sV8WC--qmNBsekfkPkNyi/view?usp=sharing" target="_blank">Lihat Project &rarr;</a>
+                    </div>
+                    <div class="card-project">
+                        <h4>Medco EP Indonesia</h4>
+                        <p>Interpretasi data geofisika industri migas.</p>
+                        <a href="https://drive.google.com/file/d/1JTkYsbvlqTjx_gm0NEv2FK8i5ebjTQ5d/view?usp=sharing" target="_blank">Lihat Project &rarr;</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <h2 class="section-title">Kontak</h2>
+                <div class="card">
+                    <form action="mailto:kevinarga01@gmail.com" method="post" enctype="text/plain" class="contact-form">
+                        <input type="text" name="Nama" placeholder="Nama" required>
+                        <input type="email" name="Email" placeholder="Email" required>
+                        <textarea name="Pesan" placeholder="Pesan" required></textarea>
+                        <button type="submit">KIRIM PESAN</button>
+                    </form>
+                </div>
+            </section>
+
+            <footer>
+                <p>&copy; <span id="year"></span> Kevin Arga Rajagukguk</p>
+            </footer>
+        </main>
     </div>
-
-    <div class="hero-content">
-        <h2>Kevin Arga Rajagukguk</h2>
-        <h2>Fresh Graduate Geofisika</h2>
-        <p>Mengolah data kebumian untuk memahami bumi dan mendukung masa depan energi yang berkelanjutan...</p>
-        <a href="mailto:kevinarga01@gmail.com" class="btn-email">Hubungi Saya</a>
-    </div>
-</section>
-
-        <section id="about" class="about">
-            <h2>Tentang Saya</h2>
-            <div class="about-content">
-                <p>
-                    Saya adalah lulusan Geofisika yang memiliki ketertarikan pada eksplorasi,
-                    analisis data kebumian, dan riset ilmiah berbasis data. Terbiasa bekerja
-                    dengan data, pemodelan, serta pemecahan masalah secara analitis.
-                </p>
-
-                <p>
-                    Untuk informasi lebih lengkap mengenai latar belakang pendidikan,
-                    pengalaman, dan keahlian, silakan lihat CV saya melalui tautan berikut:
-                </p>
-
-                <a 
-                    href="https://drive.google.com/file/d/1nVCs3KJ9O4Ge1NrIPPl4jK_-RUyxdvVt/view?usp=drive_link"
-                    target="_blank"
-                    class="cv-link">
-                    📄CV Kevin Arga Rajagukguk
-                </a>
-            </div>
-        </section>
-
-        <section id="skills" class="services">
-            <h2>Keahlian</h2>
-            <div class="services-container">
-                <div class="service-card">
-                    <h3>Analisis Data Geofisika</h3>
-                    <p>
-                        Seismik, gravitasi, resistivitas, dan magnetik untuk
-                        interpretasi bawah permukaan.
-                    </p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Pengolahan Data</h3>
-                    <p>
-                        Penggunaan Petrel, Python, Excel, dan metode analisis numerik
-                        untuk pengolahan data kebumian.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="services">
-            <h2>Project & Pengalaman</h2>
-
-            <div class="services-container">
-
-                <div class="service-card">
-                    <h3>Tugas Akhir – PT Pertamina EP</h3>
-                    <p>
-                        Project Tugas Akhir di bidang Geofisika terkait analisis
-                        data bawah permukaan.
-                    </p>
-                    <a 
-                        href="https://drive.google.com/file/d/18ZY7ErKEte3sV8WC--qmNBsekfkPkNyi/view?usp=sharing"
-                        target="_blank"
-                        class="project-link">
-                        Lihat Project
-                    </a>
-                </div>
-
-                <div class="service-card">
-                    <h3>Project Geofisika – Medco EP Indonesia</h3>
-                    <p>
-                        Analisis dan interpretasi data geofisika dalam
-                        lingkungan industri migas.
-                    </p>
-                    <a 
-                        href="https://drive.google.com/file/d/1JTkYsbvlqTjx_gm0NEv2FK8i5ebjTQ5d/view?usp=sharing"
-                        target="_blank"
-                        class="project-link">
-                        Lihat Project
-                    </a>
-                </div>
-
-                <div class="service-card">
-                    <h3>Eksplorasi Geotermal – PT Newquest Geotechnology</h3>
-                    <p>
-                        Studi eksplorasi geotermal menggunakan metode
-                        Magnetotellurik (MT).
-                    </p>
-                    <a 
-                        href="https://drive.google.com/file/d/11CwHJPms58y4R3yCLDwtlqQjz8m39e80/view?usp=sharing"
-                        target="_blank"
-                        class="project-link">
-                        Lihat Project
-                    </a>
-                </div>
-
-                <div class="service-card">
-                    <h3>Website Desa Botubarani – PT Amati Karya Indonesia</h3>
-                    <p>
-                        Pengembangan website informasi untuk memperkenalkan
-                        terumbu karang dan mendukung UMKM lokal.
-                    </p>
-                    <a 
-                        href="https://drive.google.com/file/d/1HtSSWm01l6mI3vaOUflxkatUUkvxUoUJ/view?usp=sharing"
-                        target="_blank"
-                        class="project-link">
-                        Lihat Project
-                    </a>
-                </div>
-
-                <div class="service-card">
-                    <h3>Solusi Lingkungan – PT Amati Karya Indonesia</h3>
-                    <p>
-                        Inovasi pengelolaan limbah plastik dan perlindungan
-                        garis pantai menggunakan tetrapod ramah lingkungan.
-                    </p>
-                    <a 
-                        href="https://drive.google.com/file/d/1y9-lLiyEJ4nYG5plUcQpuwXxMV8sBAti/view?usp=sharing"
-                        target="_blank"
-                        class="project-link">
-                        Lihat Project
-                    </a>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <h2>Kontak</h2>
-
-            <form
-                action="mailto:kevinarga01@gmail.com"
-                method="post"
-                enctype="text/plain"
-            >
-                <input type="text" name="Nama" placeholder="Nama" required>
-                <input type="email" name="Email" placeholder="Email" required>
-                <textarea name="Pesan" placeholder="Pesan" required></textarea>
-                <button type="submit">Kirim Pesan</button>
-            </form>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>&copy; <span id="year"></span> Kevin Arga Rajagukguk</p>
-    </footer>
 
     <script src="js/script.js"></script>
 </body>
